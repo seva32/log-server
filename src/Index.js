@@ -73,7 +73,7 @@ app.use(rateLimiterMiddleware);
 /// POST '/:id/log' - Log the request body into a file. Each request will appended
 /// into a file.
 ///
-app.post("/:id/log/", function (req, res) {
+app.post("/logserver/:id/log/", function (req, res) {
   var logName = req.params.id;
   Log(argv.d, logName)
     .write(req.body)
@@ -86,8 +86,8 @@ app.post("/:id/log/", function (req, res) {
 /// Get '/log' - Log the request body into a file. Each request will appended
 /// into a file.
 ///
-app.get("/*", serveIndex(argv.d, { icons: true, view: "details" }));
-app.get("/*.log", serveStatic(argv.d, { icons: true }));
+app.get("/logserver/*", serveIndex(argv.d, { icons: true, view: "details" }));
+app.get("/logserver/*.log", serveStatic(argv.d, { icons: true }));
 
 app.use("*", (req, res) => {
   res.writeHead(200, { "Content-Type": "text/plain" });
@@ -100,6 +100,6 @@ app.listen(argv.p);
 ///
 /// Show somethin on stdout
 ///
-console.log(_.template("http://localhost:<%= port %>")({ port: argv.p }));
+console.log(_.template("https://localhost:<%= port %>")({ port: argv.p }));
 
 console.log(_.template("Logs directory '<%= dir %>'")({ dir: argv.d }));
