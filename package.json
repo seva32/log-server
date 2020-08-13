@@ -1,0 +1,22 @@
+{
+  "name": "log-server",
+  "version": "1.1.0",
+  "description": "Simple file based log server",
+  "main": "src/Index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "exit 0",
+    "start": "node src/Index.js -p 9000 -d seva32"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "body-parser": "1.15.0",
+    "cors": "^2.8.5",
+    "express": "4.13.4",
+    "lodash": "4.5.0",
+    "q": "1.5.1",
+    "serve-index": "1.9.1",
+    "serve-static": "1.14.1",
+    "yargs": "15.4.1"
+  }
+}
