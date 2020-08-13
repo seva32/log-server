@@ -1,4 +1,5 @@
-var _ = require("lodash"),
+// const dotenv = require("dotenv");
+const _ = require("lodash"),
   fs = require("fs"),
   path = require("path"),
   express = require("express"),
@@ -6,7 +7,11 @@ var _ = require("lodash"),
   serveIndex = require("serve-index"),
   serveStatic = require("serve-static"),
   Log = require("./Log"),
-  cors = require("./cors");
+  cors = require("./cors"),
+  helmet = require("helmet"),
+  rateLimiterMiddleware = require("./rateLimiter");
+
+// dotenv.config({ silent: true });
 
 ///
 /// Process the arguments
@@ -44,6 +49,7 @@ app.use(
   })
 );
 
+app.use(helmet());
 app.use(cors);
 
 app.use((req, res, next) => {
@@ -60,6 +66,8 @@ app.use((req, res, next) => {
 
   next();
 });
+
+app.use(rateLimiterMiddleware);
 
 ///
 /// POST '/:id/log' - Log the request body into a file. Each request will appended
